@@ -9,13 +9,16 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <div className="main">
-          <div className="gradient" />
-          <main className="app">
-            <Nav />
-            {children}
-          </main>
-        </div>
+        {/* wrap main content in provider so all child components has access */}
+        <Provider>
+          <div className="main">
+            <div className="gradient" />
+            <main className="app">
+              <Nav />
+              {children}
+            </main>
+          </div>
+        </Provider>
       </body>
     </html>
   );
