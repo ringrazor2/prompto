@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
-connectToDB();
 // call nextAuth on a object with the given providers in an array
 //  put any functions you want for nextauth
 const handler = NextAuth({
@@ -25,19 +24,26 @@ const handler = NextAuth({
       return session;
     },
     async signIn({ profile }) {
-      // check if user already exists
-      const userExists = await User.findOne({
-        email: profile.email,
-      });
-      // if no user, create user
-      if (!userExists) {
-        await User.create({
+      try {
+        await connectToDB();
+
+        // check if user already exists
+        const userExists = await User.findOne({
           email: profile.email,
-          username: profile.name.replace(" ", "").toLowerCase(),
-          image: profile.picture,
         });
+        // if no user, create user
+        if (!userExists) {
+          await User.create({
+            email: profile.email,
+            username: profile.name.replace(" ", "").toLowerCase(),
+            image: profile.picture,
+          });
+        }
+        return true;
+      } catch (error) {
+        console.error(error);
+        return false;
       }
-      return true;
     },
   },
 });

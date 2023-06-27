@@ -9,6 +9,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
+        {/* usually done in app.js but layout covers whole app */}
         {/* wrap main content in provider so all child components has access */}
         <Provider>
           <div className="main">

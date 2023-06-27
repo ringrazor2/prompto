@@ -4,6 +4,7 @@ import { Schema, model, models } from "mongoose";
 const UserSchema = new Schema({
   email: {
     type: String,
+    // schema allows if needed and error message
     unique: [true, "Email already exists"],
     required: [true, "Email is required!"],
   },
