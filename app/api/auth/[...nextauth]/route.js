@@ -4,6 +4,7 @@ import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
 connectToDB();
+
 // call nextAuth on a object with the given providers in an array
 //  put any functions you want for nextauth
 const handler = NextAuth({

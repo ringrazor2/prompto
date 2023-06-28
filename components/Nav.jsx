@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -12,6 +11,7 @@ const Nav = () => {
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
+  // gives us google info
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
