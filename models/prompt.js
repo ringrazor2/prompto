@@ -1,6 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const PromptSchema = new Schema({
+  // get user data by referencing User DB
   creator: {
     type: Schema.Types.ObjectId,
     ref: "User",
