@@ -5,8 +5,8 @@ import { connectToDB } from "@utils/database";
 
 connectToDB();
 
-// call nextAuth on a object with the given providers in an array
-//  put any functions you want for nextauth
+// Have to configure NextAuth options with provider and callbacks
+// All next auth requests ie signIn, callback, signOut will make request to this route
 const handler = NextAuth({
   providers: [
     GoogleProvider({
