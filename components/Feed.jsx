@@ -22,6 +22,8 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
   const { data: session } = useSession();
 
+  console.log(session);
+
   // Additional features
   const [allPosts, setAllPosts] = useState([]);
   const [searchTimeout, setSearchTimeout] = useState(null);
