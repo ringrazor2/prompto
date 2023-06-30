@@ -54,12 +54,12 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       </div>
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
       <p
-        className="font-inter text-sm blue_gradient cursot-pointer"
+        className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => {
           handleTagClick && handleTagClick(post.tag);
         }}
       >
-        {post.tag}
+        #{post.tag}
       </p>
       {/* this is a reuseable component so adding conditional where we need it */}
       {/* allow edit if session id same as poster id and we are on profile page */}

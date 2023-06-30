@@ -7,7 +7,6 @@ import Form from "@components/Form";
 
 const EditPrompt = () => {
   const router = useRouter();
-  const { data: session } = useSession();
   const searchParams = useSearchParams();
 
   //get the id based off url
@@ -32,38 +31,40 @@ const EditPrompt = () => {
     if (promptId) getPromptDetails();
   }, [promptId]);
 
-  //   const createPrompt = async (e) => {
-  //     e.preventDefault();
-  //     // for loader
-  //     setSubmitting(true);
-  //     try {
-  //       // Post prompt data to user DB
-  //       const response = await fetch("/api/prompt/new", {
-  //         method: "POST",
-  //         body: JSON.stringify({
-  //           prompt: post.prompt,
-  //           userId: session?.user.id,
-  //           tag: post.tag,
-  //         }),
-  //       });
+  const UpdatePrompt = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
 
-  //       if (response.ok) {
-  //         router.push("/");
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //     } finally {
-  //       // happens regardless
-  //       setSubmitting(false);
-  //     }
-  //   };
+    if (!promptId) return alert("Prompt ID not found");
+
+    try {
+      // Post prompt data to user DB
+      const response = await fetch(`/api/prompt/${promptId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          prompt: post.prompt,
+          tag: post.tag,
+        }),
+      });
+
+      if (response.ok) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      // happens regardless
+      setSubmitting(false);
+    }
+  };
   return (
+    // the form will be pre populated with data from the specific prompt
     <Form
       type="Edit"
       post={post}
       setPost={setPost}
       submitting={submitting}
-      //   handleSubmit={createPrompt}
+      handleSubmit={UpdatePrompt}
     />
   );
 };
